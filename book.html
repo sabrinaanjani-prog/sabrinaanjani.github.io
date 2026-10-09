@@ -1,0 +1,267 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Book a Table - Little Lemon</title>
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    body {
+      margin: 0;
+      background-color: #FAFCFB;
+      color: #263238;
+      font-family: Arial, sans-serif;
+    }
+
+    .status {
+      text-align: center;
+      color: #B86B00;
+      font-weight: bold;
+      font-size: 20px;
+      margin: 0 0 15px;
+    }
+
+    nav {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    nav a {
+      color: #0067A8;
+      text-decoration: none;
+      margin: 0 16px;
+      font-size: 20px;
+    }
+
+    nav a.active {
+      font-weight: bold;
+    }
+
+    main {
+      max-width: 920px;
+      margin: 0 auto 30px;
+      padding: 35px 30px;
+      border: 1px solid #B8D0D0;
+      background: #FAFCFB;
+    }
+
+    h1 {
+      color: #075451;
+      font-size: 50px;
+      margin: 20px 0 30px;
+    }
+
+    .form-row {
+      margin-bottom: 2px;
+    }
+
+    label {
+      font-size: 20px;
+    }
+
+    input, select, textarea {
+      font-family: Arial, sans-serif;
+      font-size: 16px;
+    }
+
+    .text-input {
+      width: 205px;
+      height: 22px;
+    }
+
+    #party-size {
+      width: 75px;
+      height: 27px;
+    }
+
+    .date-input {
+      width: 140px;
+      height: 25px;
+    }
+
+    .time-input {
+      width: 90px;
+      height: 25px;
+    }
+
+    .seating {
+      margin: 8px 0 5px;
+    }
+
+    .seating label {
+      margin-right: 8px;
+    }
+
+    textarea {
+      width: 205px;
+      height: 58px;
+      vertical-align: middle;
+      resize: vertical;
+    }
+
+    .hint {
+      color: #647078;
+      font-size: 16px;
+      margin: 20px 0;
+    }
+
+    button {
+      padding: 4px 8px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    #result {
+      margin-top: 20px;
+      color: #075451;
+      font-weight: bold;
+    }
+
+    @media (max-width: 600px) {
+      main {
+        margin: 0 12px 25px;
+        padding: 20px 15px;
+      }
+
+      h1 {
+        font-size: 36px;
+      }
+
+      nav a {
+        display: inline-block;
+        font-size: 16px;
+        margin: 6px;
+      }
+
+      .form-row label {
+        display: inline-block;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <p class="status">Welcome to Little Lemon 🍋</p>
+
+  <nav>
+    <a href="index.html">Menu</a>
+    <a href="location.html">Location</a>
+    <a href="book.html" class="active">Book a Table</a>
+  </nav>
+
+  <main>
+    <h1>BOOK A TABLE</h1>
+
+    <form id="booking-form">
+
+      <div class="form-row">
+        <label for="name">Name</label>
+        <input class="text-input" id="name"
+               name="name" type="text" required>
+      </div>
+
+      <div class="form-row">
+        <label for="email">Email</label>
+        <input class="text-input" id="email"
+               name="email" type="email" required>
+      </div>
+
+      <div class="form-row">
+        <label for="party-size">Party size</label>
+        <input id="party-size" name="partySize"
+               type="number" min="1" max="20" required>
+      </div>
+
+      <div class="form-row">
+        <label for="date">Date</label>
+        <input class="date-input" id="date"
+               name="date" type="date" required>
+      </div>
+
+      <div class="form-row">
+        <label for="time">Time</label>
+        <input class="time-input" id="time"
+               name="time" type="time" required>
+      </div>
+
+      <div class="seating">
+        <label>
+          <input type="radio" name="seating"
+                 value="Indoor" required>
+          Indoor
+        </label>
+
+        <label>
+          <input type="radio" name="seating"
+                 value="Outdoor">
+          Outdoor
+        </label>
+      </div>
+
+      <div class="form-row">
+        <label for="requests">Special requests</label>
+        <textarea id="requests" name="requests"
+                  maxlength="200"></textarea>
+      </div>
+
+      <p class="hint">Up to 200 characters</p>
+
+      <button type="submit">Book a table</button>
+
+      <p id="result" role="status"></p>
+
+    </form>
+  </main>
+
+  <script>
+    const dateField = document.getElementById("date");
+
+    const now = new Date();
+    const today = [
+      now.getFullYear(),
+      String(now.getMonth() + 1).padStart(2, "0"),
+      String(now.getDate()).padStart(2, "0")
+    ].join("-");
+
+    dateField.min = today;
+
+    document.getElementById("booking-form")
+      .addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        const form = new FormData(this);
+
+        const booking = {
+          name: form.get("name"),
+          email: form.get("email"),
+          partySize: form.get("partySize"),
+          date: form.get("date"),
+          time: form.get("time"),
+          seating: form.get("seating"),
+          requests: form.get("requests")
+        };
+
+        const message =
+          "Booking request prepared!\n\n" +
+          "Name: " + booking.name + "\n" +
+          "Email: " + booking.email + "\n" +
+          "Party size: " + booking.partySize + "\n" +
+          "Date: " + booking.date + "\n" +
+          "Time: " + booking.time + "\n" +
+          "Seating: " + booking.seating + "\n" +
+          "Special requests: " +
+          (booking.requests || "None");
+
+        document.getElementById("result").textContent =
+          message + "\n\nYour details have been collected in this page.";
+
+        console.log("Booking request:", booking);
+      });
+  </script>
+
+</body>
+</html>

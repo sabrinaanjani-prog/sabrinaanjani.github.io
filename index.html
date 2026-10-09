@@ -1,0 +1,627 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Little Lemon - Our Menu</title>
+
+  <meta name="description"
+        content="Discover delicious Middle Eastern dishes at Little Lemon.">
+
+  <meta name="author" content="Lazuardi Al-Muzaki">
+
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    :root {
+      --navy: #264653;
+      --green: #2A9D8F;
+      --yellow: #F4D35E;
+      --cream: #FFF8E7;
+      --orange: #E76F51;
+      --text: #263238;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--cream);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    .top-bar {
+      background: var(--navy);
+      color: white;
+      text-align: center;
+      padding: 8px 15px;
+      font-size: 13px;
+      letter-spacing: 1px;
+    }
+
+    header {
+      text-align: center;
+      padding: 30px 20px 25px;
+    }
+
+    .logo {
+      color: var(--navy);
+      font-family: Georgia, serif;
+      font-size: clamp(34px, 5vw, 48px);
+      font-weight: bold;
+      letter-spacing: -1px;
+      margin: 0;
+    }
+
+    .logo span {
+      color: var(--green);
+    }
+
+    .tagline {
+      margin: 5px 0 0;
+      color: #647078;
+      font-size: 14px;
+      letter-spacing: 1px;
+    }
+
+    nav {
+      background: var(--navy);
+      padding: 15px 12px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    nav ul {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px 35px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav a {
+      color: white;
+      font-size: 14px;
+      font-weight: bold;
+      transition: color 0.2s;
+    }
+
+    nav a:hover,
+    nav a.current {
+      color: var(--yellow);
+    }
+
+    .hero {
+      max-width: 1100px;
+      margin: 35px auto 20px;
+      padding: 55px 45px;
+      background: var(--navy);
+      color: white;
+      border-radius: 18px;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .eyebrow {
+      color: var(--yellow);
+      font-size: 12px;
+      font-weight: bold;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      font-family: Georgia, serif;
+      font-size: clamp(36px, 5vw, 55px);
+      line-height: 1.12;
+      margin: 15px 0;
+    }
+
+    .hero p {
+      color: #E9F5DB;
+      max-width: 470px;
+      margin-bottom: 28px;
+    }
+
+    .hero-image {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 14px;
+    }
+
+    .button {
+      display: inline-block;
+      background: var(--yellow);
+      color: var(--navy);
+      padding: 13px 24px;
+      border-radius: 7px;
+      font-weight: bold;
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    .button:hover {
+      background: #ffe783;
+      transform: translateY(-2px);
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 55px auto;
+      padding: 0 24px;
+    }
+
+    .section-heading {
+      text-align: center;
+      margin-bottom: 35px;
+    }
+
+    .section-heading h2 {
+      font-family: Georgia, serif;
+      color: var(--navy);
+      font-size: 36px;
+      margin: 0 0 8px;
+    }
+
+    .section-heading p {
+      color: #647078;
+      margin: 0;
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 25px;
+    }
+
+    .menu-card {
+      background: white;
+      border: 1px solid #eee5d2;
+      border-radius: 14px;
+      overflow: hidden;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+
+    .menu-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 28px rgba(38, 70, 83, 0.12);
+    }
+
+    .menu-card img {
+      display: block;
+      width: 100%;
+      height: 210px;
+      object-fit: cover;
+      background: #eee5d2;
+    }
+
+    .menu-info {
+      padding: 20px;
+    }
+
+    .menu-info h3 {
+      color: var(--navy);
+      font-family: Georgia, serif;
+      font-size: 22px;
+      margin: 0 0 8px;
+    }
+
+    .menu-info p {
+      color: #647078;
+      font-size: 14px;
+      min-height: 45px;
+      margin: 0 0 15px;
+    }
+
+    .menu-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .price {
+      color: var(--orange);
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .category {
+      background: #E9F5DB;
+      color: #28766D;
+      border-radius: 20px;
+      padding: 5px 10px;
+      font-size: 10px;
+      font-weight: bold;
+    }
+
+    .price-list {
+      margin-top: 55px;
+      background: white;
+      border-radius: 14px;
+      padding: 25px;
+      border: 1px solid #eee5d2;
+    }
+
+    .price-list h2 {
+      font-family: Georgia, serif;
+      color: var(--navy);
+      margin-top: 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 13px;
+      text-align: left;
+      border-bottom: 1px solid #eee5d2;
+    }
+
+    th {
+      background: var(--navy);
+      color: white;
+    }
+
+    td:last-child,
+    th:last-child {
+      text-align: right;
+    }
+
+    .reservation {
+      margin-top: 55px;
+      background: #E9F5DB;
+      border: 1px solid #cfe2c5;
+      border-radius: 16px;
+      padding: 40px 25px;
+      text-align: center;
+    }
+
+    .reservation h2 {
+      color: var(--navy);
+      font-family: Georgia, serif;
+      font-size: 32px;
+      margin: 0 0 10px;
+    }
+
+    .reservation p {
+      color: #546E7A;
+      margin-bottom: 25px;
+    }
+
+    .reservation .button {
+      background: var(--navy);
+      color: white;
+    }
+
+    footer {
+      margin-top: 65px;
+      background: var(--navy);
+      color: white;
+      padding: 35px 20px;
+      text-align: center;
+    }
+
+    footer h2 {
+      font-family: Georgia, serif;
+      color: var(--yellow);
+      margin-top: 0;
+    }
+
+    footer p {
+      font-size: 14px;
+      margin: 7px 0;
+    }
+
+    .copyright {
+      margin-top: 25px;
+      padding-top: 18px;
+      border-top: 1px solid #536b75;
+      color: #d6e0e2;
+      font-size: 12px;
+    }
+
+    @media (max-width: 760px) {
+      .hero {
+        margin: 20px 15px;
+        padding: 30px 23px;
+        grid-template-columns: 1fr;
+      }
+
+      .hero-image {
+        height: 230px;
+      }
+
+      .menu-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 15px;
+      }
+
+      .menu-card img {
+        height: 160px;
+      }
+
+      .menu-info {
+        padding: 14px;
+      }
+
+      .menu-info h3 {
+        font-size: 18px;
+      }
+
+      .menu-info p {
+        min-height: 65px;
+      }
+
+      nav ul {
+        gap: 10px 18px;
+      }
+    }
+
+    @media (max-width: 460px) {
+      .menu-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .menu-card img {
+        height: 220px;
+      }
+
+      .menu-info p {
+        min-height: auto;
+      }
+
+      .section-heading h2 {
+        font-size: 30px;
+      }
+
+      main {
+        padding: 0 16px;
+      }
+
+      .price-list {
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="top-bar">
+    FRESH INGREDIENTS · MEDITERRANEAN FLAVORS
+  </div>
+
+  <header>
+    <a href="index.html" aria-label="Little Lemon homepage">
+      <p class="logo">Little <span>Lemon</span> 🍋</p>
+    </a>
+    <p class="tagline">
+      Middle Eastern food in the Main District
+    </p>
+  </header>
+
+  <nav aria-label="Main navigation">
+    <ul>
+      <li>
+        <a href="index.html" class="current">Menu</a>
+      </li>
+      <li>
+        <a href="special.html">Chef's Special</a>
+      </li>
+      <li>
+        <a href="location.html">Location</a>
+      </li>
+      <li>
+        <a href="book.html">Book a Table</a>
+      </li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <div>
+      <span class="eyebrow">Welcome to Little Lemon</span>
+
+      <h1>Fresh flavors.<br>Beautiful moments.</h1>
+
+      <p>
+        Discover delicious Mediterranean and Middle Eastern
+        dishes, made with fresh ingredients and a little
+        touch of lemon.
+      </p>
+
+      <a href="#our-menu" class="button">
+        Explore Our Menu →
+      </a>
+    </div>
+
+    <img
+      class="hero-image"
+      src="falafel.jpeg"
+      alt="Freshly prepared falafel served at Little Lemon"
+    >
+  </section>
+
+  <main>
+    <section id="our-menu">
+      <div class="section-heading">
+        <h2>Our Menu</h2>
+        <p>Good food, fresh ingredients, and flavors to remember.</p>
+      </div>
+
+      <div class="menu-grid">
+
+        <article class="menu-card">
+          <img src="falafel.jpeg" alt="Crispy falafel">
+          <div class="menu-info">
+            <h3>Falafel</h3>
+            <p>Chickpeas, fresh herbs, and aromatic spices.</p>
+            <div class="menu-bottom">
+              <span class="price">$10</span>
+              <span class="category">BESTSELLER</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img src="salad.jpeg" alt="Mediterranean pasta salad">
+          <div class="menu-info">
+            <h3>Pasta Salad</h3>
+            <p>Fresh vegetables, mozzarella, herbs, and lemon dressing.</p>
+            <div class="menu-bottom">
+              <span class="price">$12</span>
+              <span class="category">FRESH PICK</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img
+            src="https://images.unsplash.com/photo-1577906096429-f73c2c312435?auto=format&fit=crop&w=800&q=80"
+            alt="Creamy hummus served with olive oil"
+            loading="lazy"
+          >
+          <div class="menu-info">
+            <h3>Hummus</h3>
+            <p>Chickpeas, tahini, olive oil, and a squeeze of lemon.</p>
+            <div class="menu-bottom">
+              <span class="price">$8</span>
+              <span class="category">CLASSIC</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img
+            src="https://images.unsplash.com/photo-1519676867240-f03562e64548?auto=format&fit=crop&w=800&q=80"
+            alt="Sweet pastry dessert"
+            loading="lazy"
+          >
+          <div class="menu-info">
+            <h3>Baklava</h3>
+            <p>Sweet pastry layered with nuts and golden syrup.</p>
+            <div class="menu-bottom">
+              <span class="price">$7</span>
+              <span class="category">DESSERT</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img
+            src="https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=800&q=80"
+            alt="Chicken shawarma wrap"
+            loading="lazy"
+          >
+          <div class="menu-info">
+            <h3>Chicken Shawarma</h3>
+            <p>Seasoned chicken with Middle Eastern spices.</p>
+            <div class="menu-bottom">
+              <span class="price">$15</span>
+              <span class="category">CHEF'S PICK</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img
+            src="salad.jpeg"
+            alt="Fresh seasonal dish"
+          >
+          <div class="menu-info">
+            <h3>Lemon Herb Special</h3>
+            <p>A fresh, flavorful creation inspired by our chef.</p>
+            <div class="menu-bottom">
+              <span class="price">$14</span>
+              <span class="category">SPECIAL</span>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <section class="price-list">
+      <h2>Our Price List</h2>
+
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Dish</th>
+            <th scope="col">Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Falafel</td>
+            <td>$10</td>
+          </tr>
+          <tr>
+            <td>Pasta Salad</td>
+            <td>$12</td>
+          </tr>
+          <tr>
+            <td>Hummus</td>
+            <td>$8</td>
+          </tr>
+          <tr>
+            <td>Baklava</td>
+            <td>$7</td>
+          </tr>
+          <tr>
+            <td>Chicken Shawarma</td>
+            <td>$15</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="reservation">
+      <h2>A table full of goodness awaits.</h2>
+      <p>
+        Join us for a delicious meal and make your day
+        a little brighter.
+      </p>
+
+      <a href="book.html" class="button">
+        Book Your Table →
+      </a>
+    </section>
+  </main>
+
+  <footer>
+    <h2>Little Lemon 🍋</h2>
+
+    <p>📍 123 Rome Road, Main District, Capital City</p>
+    <p>🕐 Open daily, 11:00–22:00</p>
+    <p>☎ (021) 555 0123</p>
+
+    <div class="copyright">
+      © 2026 Little Lemon. All rights reserved.
+    </div>
+  </footer>
+
+</body>
+</html>
